@@ -5,9 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { List, ListItem, ListItemText, SwipeableDrawer } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
@@ -28,10 +26,7 @@ function Header() {
         {['Customers', 'Packeges', 'Invoice',].map((text, index) => (
           <Link style={{ textDecoration: "none", color: 'inherit' }} to={`${text !== "Customers" ? `/${text}` : "/"}`}>
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText>{text}</ListItemText>
+              <ListItemText align="left">{text}</ListItemText>
             </ListItem>
           </Link>
         ))}

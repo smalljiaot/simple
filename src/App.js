@@ -9,7 +9,6 @@ import Header from './component/Header/Header';
 import InvoicesList from './component/Invoices-List/InvoicesList';
 import PackageList from './component/Package-List/PackageList';
 
-
 function App() {
 
   const [appData, setAppData] = useState({ customers: [], packages: [] });
