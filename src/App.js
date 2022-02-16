@@ -22,6 +22,7 @@ function App() {
       .then(data => { setAppData(data) })
   }, [])
 
+
   return (
     <div className="App">
       <Router>
