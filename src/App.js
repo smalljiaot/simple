@@ -32,9 +32,10 @@ function App() {
   const [appData, setAppData] = useState({ customers: [], packages: [] });
   const [invoices, setInvoices] = useState([]);
 
+  useEffect(()=>{
   fetch("/data.json").then(response => response.json())
   .then(data => { setAppData(data) });
-
+}, [])
 
   return (
     <div className="App">
