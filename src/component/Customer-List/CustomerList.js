@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 import Button from '@mui/material/Button';
@@ -10,8 +10,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+
 function CustomerList({ data }) {
-  const appData = data;
+  const [appData, setAppData] = useState([])
+
+  useEffect(() => {
+    setAppData(data.customers)
+  }, [data])
+
+  function DeleteHendler(Id) {
+    setAppData(appData.filter((row) => row.id !== Id))
+  }
 
   return (
     <div>
@@ -19,7 +28,6 @@ function CustomerList({ data }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-
               <TableCell >id</TableCell>
               <TableCell >Name</TableCell>
               <TableCell ></TableCell>
@@ -28,8 +36,7 @@ function CustomerList({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {appData.customers.map((row) => {
-
+            {appData.map((row) => {
               return (
                 <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -39,10 +46,11 @@ function CustomerList({ data }) {
                   </TableCell>
                   <TableCell >{row.name}</TableCell>
                   <TableCell ><Button variant="contained">Create Invoice</Button></TableCell>
-                  <TableCell ><Button variant="contained">Delete</Button></TableCell>
+                  <TableCell ><Button onClick={() => DeleteHendler(row.id)} variant="contained">Delete</Button></TableCell>
                 </TableRow>
               )
             })}
+
           </TableBody>
         </Table>
       </TableContainer>
