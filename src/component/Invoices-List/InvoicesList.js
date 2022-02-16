@@ -1,0 +1,67 @@
+import React, { useState } from 'react'
+
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+
+function InvoicesList() {
+  const [invoices, setInvoices] = useState([]);
+  return (
+    <div>
+
+<TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>                
+                <TableCell>Customer Name</TableCell>
+                <TableCell>Total Weight</TableCell>
+                <TableCell>Total Price</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {invoices.map((row) => {
+
+                return (
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                  
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Drawer
+          anchor={"left"}
+          open={false}
+          onClose={() => { }}
+
+        >
+          <List style={{ width: "300px" }}>
+            <ListItem button>
+              <ListItemText primary={"Packages"} />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary={"Customers"} />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary={"Invoices"} />
+            </ListItem>
+          </List>
+        </Drawer>
+
+    </div>
+  )
+}
+
+export default InvoicesList
