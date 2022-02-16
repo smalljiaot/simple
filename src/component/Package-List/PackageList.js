@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 function PackageList({ data }) {
   const [appData, setAppData] = useState([])
@@ -89,11 +89,14 @@ function PackageList({ data }) {
 
                     <TextField
                       margin="dense"
-                      label="weight (as kg)"
+                      label="weight"
                       type="number"
                       fullWidth
                       variant="standard"
                       required={true}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+                      }}
                     />
                     <TextField
                       margin="dense"
