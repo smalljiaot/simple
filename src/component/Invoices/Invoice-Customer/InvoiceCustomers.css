@@ -1,0 +1,36 @@
+.invoice {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 50px 40px;
+}
+
+.shipingID {
+  grid-column: 3;
+}
+
+.weight {
+  grid-column: 2;
+  grid-row: 2/5;
+  display: flex;
+  flex-direction: column;
+}
+
+.weight p:last-child {
+  margin-top: auto;
+}
+
+.price {
+  grid-column: 3;
+  grid-row: 2/5;
+  display: flex;
+  flex-direction: column;
+}
+.price p:last-child {
+  margin-top: auto;
+}
+
+p {
+  grid-column: 1/4;
+  grid-row: 5;
+}
