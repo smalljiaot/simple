@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+import UserContext from '../../../userContext';
 
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -13,16 +14,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
-function InvoicesList({ data }) {
-
-  const [invoices, setInvoices] = useState([])
-  const [packages, setPackages] = useState([])
-
-  useEffect(() => {
-    setInvoices(data.customers)
-    setPackages(data.packages)
-  }, [data])
-
+function InvoicesList() {
+  const {packages, customers } = useContext(UserContext)
   
   function PriceSum(id) {
     let count = 0;
@@ -48,7 +41,7 @@ function InvoicesList({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {invoices.map((row) => {
+            {customers.map((row) => {
               return (
                 <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
