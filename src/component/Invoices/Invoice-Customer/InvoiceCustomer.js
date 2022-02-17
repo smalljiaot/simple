@@ -1,25 +1,18 @@
 import React, { useContext, useEffect, useState, } from 'react'
+import { useParams } from 'react-router-dom'
 import UserContext from '../../../userContext'
 import { PriceSum, WeightSum } from "../utils"
 import "./InvoiceCustomers.css"
 
 function InvoiceCustomer(props) {
   const { packages, customers } = useContext(UserContext)
-  const ID = 1;
-  
-  
-  // const [ID, setID] = useState(props.match.params.id)
-  
-  // useEffect(() => {
-    //   setCurrentPackage(packages.filter((packages) => packages.customerid === ID))
-    
-    //   console.log(currentPackage);
-    // }, [ID, packages,])
-    
-    const today = new Date()
-    const FullDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`
-    
-    const currentPackage = packages.filter((packages) => packages.customerid === ID)
+  const { id } = useParams();
+  const ID = parseInt(id);
+
+  const today = new Date()
+  const FullDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`
+
+  const currentPackage = packages.filter((packages) => packages.customerid === ID)
 
 
   if (currentPackage.length) {
@@ -50,7 +43,7 @@ function InvoiceCustomer(props) {
         <div className='price'>
           <p>Price</p>
           {currentPackage.map((packages) => <p>{packages.price}</p>)}
-          <p>{PriceSum(ID, packages)}</p>
+          <p>Total: {PriceSum(ID, packages)}</p>
         </div>
 
         <p>You received {currentPackage.length} packages <br />
