@@ -1,9 +1,7 @@
-import React, { useState,  useContext } from 'react'
+import React, { useContext } from 'react'
 import UserContext from '../../userContext';
 
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,35 +11,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField
-} from '@mui/material';
+import CreatePackage from './CreatePackage';
+
 
 function PackageList() {
   const {packages, customers, setPackages } = useContext(UserContext)
 
-  const [open, setOpen] = useState(false);
-
-
   function DeleteHendler(Id) {
     setPackages(packages.filter((row) => row.id !== Id))
-  }
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  }
-  const handleClose = () => {
-    setOpen(false);
   }
 
   function handleUp(index) {
@@ -61,10 +38,6 @@ function PackageList() {
     setPackages([...packages])
   }
 
-  const [name, setName] = useState('');
-  const handleChange = (event) => {
-    setName(event.target.value);
-  }
 
   return (
     <div>
@@ -78,68 +51,8 @@ function PackageList() {
               <TableCell>Price</TableCell>
 
               <TableCell>
-                <IconButton onClick={handleClickOpen}
-                  size="large"
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                >
-                  <AddIcon />
-                </IconButton>
-                <Dialog open={open} onClose={handleClose}>
-                  <DialogTitle>Add Package</DialogTitle>
-                  <DialogContent>
-                    <DialogContentText>
-                      Please add all the needed information for the deivery
-                    </DialogContentText>
 
-                    <FormControl sx={{ minWidth: 120 }}
-                      required={true}
-                      margin="normal"
-                      fullWidth
-                      variant="standard"
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">Customer Name</InputLabel>
-                      <Select
-                        value={name}
-                        onChange={handleChange}
-                        label="Customer Name"
-                      >
-                        <MenuItem value="">
-                          <em>select</em>
-                        </MenuItem>
-                        <MenuItem value={"Dave"}>Dave</MenuItem>
-                        <MenuItem value={"Sarah"}>Sarah</MenuItem>
-                        <MenuItem value={"Otis"}>Otis</MenuItem>
-                        <MenuItem value={"Marry"}>Marry</MenuItem>
-                      </Select>
-                    </FormControl>
-
-                    <TextField
-                      margin="dense"
-                      label="weight"
-                      type="number"
-                      fullWidth
-                      variant="standard"
-                      required={true}
-                      InputProps={{
-                        startAdornment: <InputAdornment position="start">kg</InputAdornment>,
-                      }}
-                    />
-                    <TextField
-                      margin="dense"
-                      label="price"
-                      type="number"
-                      fullWidth
-                      variant="standard"
-                      required={true}
-                    />
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit" onClick={handleClose}>Save</Button>
-                  </DialogActions>
-                </Dialog>
+         <CreatePackage/>
 
               </TableCell>
 
