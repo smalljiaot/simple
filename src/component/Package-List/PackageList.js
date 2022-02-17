@@ -10,6 +10,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 import { ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 function PackageList({ data }) {
@@ -17,7 +20,7 @@ function PackageList({ data }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setAppData(data.packages.sort((a, b) => a.shippingOrder - b.shippingOrder))
+    setAppData(data.packages)
   }, [data])
 
   function DeleteHendler(Id) {
@@ -31,6 +34,23 @@ function PackageList({ data }) {
     setOpen(false);
   }
 
+  function handleUp(index) {
+    if (index <= 0) {
+      return
+    }
+    appData[index].shippingOrder--;
+    appData[index - 1].shippingOrder++;
+    setAppData([...appData])
+  }
+
+  function handleDown(index) {
+    if (index >= appData.length - 1) {
+      return
+    }
+    appData[index].shippingOrder++;
+    appData[index + 1].shippingOrder--;
+    setAppData([...appData])
+  }
 
   const [name, setName] = useState('');
 
@@ -119,7 +139,7 @@ function PackageList({ data }) {
           </TableHead>
           <TableBody>
 
-            {appData.map((row) => {
+            {appData.sort((a, b) => a.shippingOrder - b.shippingOrder).map((row, index) => {
               return (
                 <TableRow key={row.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -131,7 +151,11 @@ function PackageList({ data }) {
                   <TableCell >{row.weight}</TableCell>
 
                   <TableCell >{row.price}</TableCell>
-                  <TableCell ><Button onClick={() => DeleteHendler(row.id)} variant="contained">Delete</Button><i>Up down buttons should go here</i></TableCell>
+                  <TableCell style={{ display: "flex" }}>
+                    <Button onClick={() => DeleteHendler(row.id)} variant="contained">Delete</Button>
+                    <Button onClick={() => handleDown(index)}><ArrowDropDownIcon color='inherit' fontSize='large' /></Button>
+                    <Button onClick={() => handleUp(index)}><ArrowDropUpIcon color='inherit' fontSize='large' /></Button>
+                  </TableCell>
                 </TableRow>
               )
             })}
