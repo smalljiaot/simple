@@ -6,7 +6,8 @@ import {
 import './App.css';
 import CustomerList from './component/Customer-List/CustomerList';
 import Header from './component/Header/Header';
-import InvoicesList from './component/Invoices-List/InvoicesList';
+import InvoiceCustomer from './component/Invoices/Invoice-Customer/InvoiceCustomer';
+import InvoicesList from './component/Invoices/Invoices-List/InvoicesList';
 import PackageList from './component/Package-List/PackageList';
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
           <Route exact path="/"> <CustomerList data={appData} /></Route>
           <Route path="/Packeges"> <PackageList data={appData} /></Route>
           <Route path="/Invoice">  <InvoicesList data={appData} /></Route>
+          <Route path="/InvoicePage"> <InvoiceCustomer/> </Route>
+        
         </Switch>
       </Router>
     </div>
