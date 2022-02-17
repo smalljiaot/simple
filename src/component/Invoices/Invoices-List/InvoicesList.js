@@ -35,7 +35,7 @@ function InvoicesList() {
           <TableBody>
             {customers.map((row) => {
               return (
-                <TableRow
+                <TableRow key={row.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>{row.name}</TableCell>
@@ -48,27 +48,6 @@ function InvoicesList() {
         </Table>
       </TableContainer>
 
-
-
-      {/* move to Header */}
-      <Drawer
-        anchor={"left"}
-        open={false}
-        onClose={() => { }}
-
-      >
-        <List style={{ width: "300px" }}>
-          <ListItem button>
-            <ListItemText primary={"Packages"} />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary={"Customers"} />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary={"Invoices"} />
-          </ListItem>
-        </List>
-      </Drawer>
 
     </div>
   )

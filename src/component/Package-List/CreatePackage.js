@@ -61,7 +61,6 @@ function CreatePackage() {
     }
   }
 
-  console.log(packages);
 
   const handleClickOpen = () => {
     setOpen(true);

@@ -42,7 +42,7 @@ function InvoiceCustomer(props) {
 
         <div className='price'>
           <p>Price</p>
-          {currentPackage.map((packages) => <p>{packages.price}</p>)}
+          {currentPackage.map((packages, index) => <p key={packages.price+index}>{packages.price}</p>)}
           <p>Total: {PriceSum(ID, packages)}</p>
         </div>
 
