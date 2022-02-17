@@ -38,8 +38,8 @@ function App() {
           <Switch>
             <Route exact path="/"> <CustomerList/></Route>
             <Route path="/Packeges"> <PackageList/></Route>
-            <Route path="/Invoice">  <InvoicesList data={appData} /></Route>
-            <Route path="/InvoicePage"> <InvoiceCustomer /> </Route>
+            <Route path="/Invoice/:id" render={(props) => <InvoiceCustomer {...props}/>}/>
+            <Route path="/Invoice">  <InvoicesList/></Route>
           </Switch>
         </Router>
       </UserProvider>

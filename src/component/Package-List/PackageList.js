@@ -52,7 +52,6 @@ function PackageList() {
     packages[index - 1].shippingOrder++;
     setPackages([...packages])
   }
-
   function handleDown(index) {
     if (index >= packages.length - 1) {
       return
@@ -63,7 +62,6 @@ function PackageList() {
   }
 
   const [name, setName] = useState('');
-
   const handleChange = (event) => {
     setName(event.target.value);
   }
