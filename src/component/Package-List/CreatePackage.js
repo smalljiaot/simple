@@ -104,10 +104,7 @@ function CreatePackage() {
                 <MenuItem value="">
                   <em>select</em>
                 </MenuItem>
-                <MenuItem value={"Dave"}>Dave</MenuItem>
-                <MenuItem value={"Sarah"}>Sarah</MenuItem>
-                <MenuItem value={"Otis"}>Otis</MenuItem>
-                <MenuItem value={"Marry"}>Marry</MenuItem>
+                {customers.map((customer)=><MenuItem value={customer.name}>{customer.name}</MenuItem>)}
               </Select>
             </FormControl>
 
