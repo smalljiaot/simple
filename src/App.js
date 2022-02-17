@@ -25,7 +25,7 @@ function App() {
         <Switch>
           <Route exact path="/"> <CustomerList data={appData} /></Route>
           <Route path="/Packeges"> <PackageList data={appData} /></Route>
-          <Route path="/Invoice">  <InvoicesList /></Route>
+          <Route path="/Invoice">  <InvoicesList data={appData} /></Route>
         </Switch>
       </Router>
     </div>
