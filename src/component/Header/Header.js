@@ -24,7 +24,7 @@ function Header() {
     >
       <List>
         {['Customers', 'Packeges', 'Invoice',].map((text, index) => (
-          <Link style={{ textDecoration: "none", color: 'inherit' }} to={`${text !== "Customers" ? `/${text}` : "/"}`}>
+          <Link key={text+index} style={{ textDecoration: "none", color: 'inherit' }} to={`${text !== "Customers" ? `/${text}` : "/"}`}>
             <ListItem button key={text}>
               <ListItemText align="left">{text}</ListItemText>
             </ListItem>
@@ -35,6 +35,25 @@ function Header() {
   );
 
   return (
+  //   <Drawer
+  //   anchor={"left"}
+  //   open={false}
+  //   onClose={() => { }}
+
+  // >
+  //   <List style={{ width: "300px" }}>
+  //     <ListItem button>
+  //       <ListItemText primary={"Packages"} />
+  //     </ListItem>
+  //     <ListItem button>
+  //       <ListItemText primary={"Customers"} />
+  //     </ListItem>
+  //     <ListItem button>
+  //       <ListItemText primary={"Invoices"} />
+  //     </ListItem>
+  //   </List>
+  // </Drawer>
+    
     <div>
       <>
         <SwipeableDrawer

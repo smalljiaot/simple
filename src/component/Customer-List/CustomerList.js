@@ -34,7 +34,7 @@ function CustomerList() {
           <TableBody>
             {customers.map((row) => {
               return (
-                <TableRow
+                <TableRow key={row.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
