@@ -14,20 +14,27 @@ import { UserProvider } from './userContext';
 
 function App() {
   const [appData, setAppData] = useState({ customers: [], packages: [] });
-  
+  const [packageLength, setPackageLength] = useState(0)
+
   useEffect(() => {
     fetch("/data.json").then(response => response.json())
-      .then(data => { setAppData(data) })
+      .then(data => {
+        setAppData(data);
+        setPackageLength(data.packages.length + 1)
+      })
   }, [])
 
   const providerOptions = {
     data: appData,
-    customers : appData.customers,
+    customers: appData.customers,
     packages: appData.packages,
+    pakLength: packageLength,
+    incPakLength:()=> setPackageLength(packageLength+1),
     setData: (data) => setAppData(data),
-    setPackages: (packages) => setAppData({customers: appData.customers, packages}),
-    setCustomers: (customers) => setAppData({packages: appData.packages, customers}),
+    setPackages: (packages) => setAppData({ customers: appData.customers, packages }),
+    setCustomers: (customers) => setAppData({ packages: appData.packages, customers }),
     changeUser: (value) => setAppData(value),
+
   }
 
   return (
@@ -36,10 +43,10 @@ function App() {
         <Router>
           <Header appData={appData} />
           <Switch>
-            <Route exact path="/"> <CustomerList/></Route>
-            <Route path="/Packeges"> <PackageList/></Route>
-            <Route path="/Invoice/:id" render={(props) => <InvoiceCustomer {...props}/>}/>
-            <Route path="/Invoice">  <InvoicesList/></Route>
+            <Route exact path="/"> <CustomerList /></Route>
+            <Route path="/Packeges"> <PackageList /></Route>
+            <Route path="/Invoice/:id" render={(props) => <InvoiceCustomer {...props} />} />
+            <Route path="/Invoice">  <InvoicesList /></Route>
           </Switch>
         </Router>
       </UserProvider>
