@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 
 function CustomerList() {
   const { setData, packages, customers } = useContext(UserContext)
@@ -40,7 +41,11 @@ function CustomerList() {
                     {row.id}
                   </TableCell>
                   <TableCell >{row.name}</TableCell>
-                  <TableCell ><Button variant="contained">Create Invoice</Button></TableCell>
+                  <TableCell >
+                    <Link style={{ textDecoration: "none", color: "inherit" }} to={`/invoice/${row.id}`}>
+                    <Button variant="contained">Create Invoice</Button>
+                  </Link>
+                  </TableCell>
                   <TableCell ><Button onClick={() => DeleteHendler(row.id)} variant="contained">Delete</Button></TableCell>
                 </TableRow>
               )
