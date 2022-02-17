@@ -9,28 +9,40 @@ import Header from './component/Header/Header';
 import InvoiceCustomer from './component/Invoices/Invoice-Customer/InvoiceCustomer';
 import InvoicesList from './component/Invoices/Invoices-List/InvoicesList';
 import PackageList from './component/Package-List/PackageList';
+import { UserProvider } from './userContext';
+
 
 function App() {
-
   const [appData, setAppData] = useState({ customers: [], packages: [] });
-
+  
   useEffect(() => {
     fetch("/data.json").then(response => response.json())
       .then(data => { setAppData(data) })
   }, [])
 
+  const providerOptions = {
+    data: appData,
+    customers : appData.customers,
+    packages: appData.packages,
+    setData: (data) => setAppData(data),
+    setPackages: (packages) => setAppData({customers: appData.customers, packages}),
+    setCustomers: (customers) => setAppData({packages: appData.packages, customers}),
+    changeUser: (value) => setAppData(value),
+  }
+
   return (
     <div className="App">
-      <Router>
-        <Header appData={appData} />
-        <Switch>
-          <Route exact path="/"> <CustomerList data={appData} /></Route>
-          <Route path="/Packeges"> <PackageList data={appData} /></Route>
-          <Route path="/Invoice">  <InvoicesList data={appData} /></Route>
-          <Route path="/InvoicePage"> <InvoiceCustomer/> </Route>
-        
-        </Switch>
-      </Router>
+      <UserProvider value={providerOptions}>
+        <Router>
+          <Header appData={appData} />
+          <Switch>
+            <Route exact path="/"> <CustomerList/></Route>
+            <Route path="/Packeges"> <PackageList/></Route>
+            <Route path="/Invoice">  <InvoicesList data={appData} /></Route>
+            <Route path="/InvoicePage"> <InvoiceCustomer /> </Route>
+          </Switch>
+        </Router>
+      </UserProvider>
     </div>
 
   );

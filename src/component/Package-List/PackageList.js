@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState,  useContext } from 'react'
+import UserContext from '../../userContext';
 
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -26,16 +27,14 @@ import {
   TextField
 } from '@mui/material';
 
-function PackageList({ data }) {
-  const [appData, setAppData] = useState([])
+function PackageList() {
+  const {packages, customers, setPackages } = useContext(UserContext)
+
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setAppData(data.packages)
-  }, [data])
 
   function DeleteHendler(Id) {
-    setAppData(appData.filter((row) => row.id !== Id))
+    setPackages(packages.filter((row) => row.id !== Id))
   }
 
   const handleClickOpen = () => {
@@ -49,18 +48,18 @@ function PackageList({ data }) {
     if (index <= 0) {
       return
     }
-    appData[index].shippingOrder--;
-    appData[index - 1].shippingOrder++;
-    setAppData([...appData])
+    packages[index].shippingOrder--;
+    packages[index - 1].shippingOrder++;
+    setPackages([...packages])
   }
 
   function handleDown(index) {
-    if (index >= appData.length - 1) {
+    if (index >= packages.length - 1) {
       return
     }
-    appData[index].shippingOrder++;
-    appData[index + 1].shippingOrder--;
-    setAppData([...appData])
+    packages[index].shippingOrder++;
+    packages[index + 1].shippingOrder--;
+    setPackages([...packages])
   }
 
   const [name, setName] = useState('');
@@ -150,7 +149,7 @@ function PackageList({ data }) {
           </TableHead>
           <TableBody>
 
-            {appData.sort((a, b) => a.shippingOrder - b.shippingOrder).map((row, index) => {
+            {packages.sort((a, b) => a.shippingOrder - b.shippingOrder).map((row, index) => {
               return (
                 <TableRow key={row.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -158,7 +157,7 @@ function PackageList({ data }) {
                   <TableCell component="th" scope="row">
                     {row.id}
                   </TableCell>
-                  <TableCell >{data.customers.find((id) => id.id === row.customerid).name}</TableCell>
+                  <TableCell >{customers.find(customer => customer.id === row.customerid)?.name}</TableCell>
                   <TableCell >{row.weight}</TableCell>
 
                   <TableCell >{row.price}</TableCell>

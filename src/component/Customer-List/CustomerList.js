@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useContext } from 'react'
+import UserContext from '../../userContext';
 
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
@@ -10,16 +10,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-
-function CustomerList({ data }) {
-  const [appData, setAppData] = useState([])
-
-  useEffect(() => {
-    setAppData(data.customers)
-  }, [data])
+function CustomerList() {
+  const { setData, packages, customers } = useContext(UserContext)
 
   function DeleteHendler(Id) {
-    setAppData(appData.filter((row) => row.id !== Id))
+    setData({ customers: customers.filter((row) => row.id !== Id), packages: packages.filter((pack) => pack.customerid !== Id) })
   }
 
   return (
@@ -36,7 +31,7 @@ function CustomerList({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {appData.map((row) => {
+            {customers.map((row) => {
               return (
                 <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
