@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import UserContext from '../../../userContext';
+import {PriceSum, WeightSum} from "../utils"
 
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -14,20 +15,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
+
+
 function InvoicesList() {
   const {packages, customers } = useContext(UserContext)
   
-  function PriceSum(id) {
-    let count = 0;
-    packages.filter((packages) => packages.customerid === id).forEach((value)=>{count += value.price})
-    return count
-  }
-
-  function WeightSum(id){
-    let count = 0;
-    packages.filter((packages) => packages.customerid === id).forEach((value)=>{count += parseInt(value.weight.substring(0, value.weight.length -2))})
-    return `${count}kg`
-  }
 
   return (
     <div>
@@ -47,8 +39,8 @@ function InvoicesList() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>{row.name}</TableCell>
-                  <TableCell>{PriceSum(row.id)}</TableCell>
-                  <TableCell>{WeightSum(row.id)}</TableCell>
+                  <TableCell>{PriceSum(row.id, packages)}</TableCell>
+                  <TableCell>{WeightSum(row.id, packages)}</TableCell>
                 </TableRow>
               )
             })}
